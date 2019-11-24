@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:text="Mankala"
-        android:textSize="32sp"/>
+        android:text="Settings"
+        android:textSize="32sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,15 +19,22 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PLAY" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SETTINGS" />
+            <CheckBox
+                android:id="@+id/check_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_toEndOf="@id/check_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sound FX"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
