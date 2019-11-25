@@ -11,11 +11,19 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         findViewById<Button>(R.id.button_settings).setOnClickListener { openSettings() }
+        findViewById<Button>(R.id.button_play).setOnClickListener { openSelectName() }
     }
 
     fun openSettings() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
+
+    fun openSelectName() {
+        val intent = Intent(this, SelectNameActivity::class.java)
+        startActivity(intent)
+    }
 }
+
+
 
