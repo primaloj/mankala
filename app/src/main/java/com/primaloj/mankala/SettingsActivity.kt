@@ -1,8 +1,10 @@
 package com.primaloj.mankala
 
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.TextView
 
 class SettingsActivity : AppCompatActivity() {
@@ -22,6 +24,11 @@ class SettingsActivity : AppCompatActivity() {
                 isChecked
             )
         }
+        findViewById<ImageButton>(R.id.button_close).setOnClickListener { close() }
+    }
+
+    fun close() {
+        finish()
     }
 
     fun toggleSound() {
