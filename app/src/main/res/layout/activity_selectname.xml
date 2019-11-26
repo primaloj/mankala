@@ -13,5 +13,13 @@
         android:text="Select Names"
         android:textSize="32sp" />
 
+    <ImageButton
+        android:id="@+id/button_close"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_close_black_24dp" />
+
 
 </RelativeLayout>
