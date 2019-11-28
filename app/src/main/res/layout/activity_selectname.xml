@@ -4,23 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="horizontal">
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:text="Player 1 Name:"
-            android:textSize="20sp"/>
-        <TextView
+            android:layout_weight="1"
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="Player 1 Name:"
+                android:textSize="30sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="15"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:text="Player 2 Name:"
-            android:textSize="20sp"/>
+            android:layout_weight="1"
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="Player 2 Name:"
+                android:textSize="30sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="15"/>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -29,7 +66,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
         android:text="Select Names"
-        android:textSize="32sp" />
+        android:textSize="48sp" />
 
     <ImageButton
         android:id="@+id/button_close"
