@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:maxLength="15"/>
+                android:maxLength="15"
+                android:textAlignment="center"/>
 
         </LinearLayout>
 
@@ -53,12 +54,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:maxLength="15"/>
+                android:maxLength="15"
+                android:textAlignment="center"/>
 
 
         </LinearLayout>
 
     </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,6 +78,14 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:background="@drawable/ic_close_black_24dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START GAME"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:layout_marginBottom="32dp"/>
 
 
 </RelativeLayout>
