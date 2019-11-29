@@ -1,5 +1,6 @@
 package com.primaloj.mankala
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -22,6 +23,11 @@ class SelectNameActivity : AppCompatActivity() {
     fun startGame() {
         val p1=findViewById<EditText>(R.id.p1).text
         val p2=findViewById<EditText>(R.id.p2).text
+        val intent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
+
+
+
     }
 }
 
