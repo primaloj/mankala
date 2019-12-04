@@ -2,30 +2,51 @@ package com.primaloj.mankala
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
-class SelectNameActivity : AppCompatActivity() {
+class SelectNameActivity : TextWatcher, AppCompatActivity() {
+    lateinit var p1: EditText
+    lateinit var p2: EditText
+    lateinit var button_start: Button
+
+    override fun afterTextChanged(s: Editable?) {
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        button_start.isEnabled = p1.text.isNotBlank() && p2.text.isNotBlank()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selectname)
         findViewById<ImageButton>(R.id.button_close).setOnClickListener { close() }
-        findViewById<Button>(R.id.button_start).setOnClickListener { startGame() }
+        p1 = findViewById(R.id.p1)
+        p2 = findViewById(R.id.p2)
+        button_start = findViewById(R.id.button_start)
+        button_start.setOnClickListener { startGame() }
+        p1.addTextChangedListener(this)
+        p2.addTextChangedListener(this)
     }
 
 
     fun close() {
         finish()
     }
-    fun startGame() {
-        val p1=findViewById<EditText>(R.id.p1).text
-        val p2=findViewById<EditText>(R.id.p2).text
-        val intent = Intent(this, GameActivity::class.java)
-        startActivity(intent)
 
+    fun startGame() {
+        val intent = Intent(this, GameActivity::class.java)
+        intent.putExtra(GameActivity.p1_name, p1.text)
+        intent.putExtra(GameActivity.p2_name, p2.text)
+        startActivity(intent)
 
 
     }
