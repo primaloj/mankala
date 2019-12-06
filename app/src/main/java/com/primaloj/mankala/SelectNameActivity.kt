@@ -44,8 +44,8 @@ class SelectNameActivity : TextWatcher, AppCompatActivity() {
 
     fun startGame() {
         val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra(GameActivity.p1_name, p1.text)
-        intent.putExtra(GameActivity.p2_name, p2.text)
+        intent.putExtra(GameActivity.p1_name, p1.text.toString())
+        intent.putExtra(GameActivity.p2_name, p2.text.toString())
         startActivity(intent)
 
 
