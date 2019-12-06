@@ -10,13 +10,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="ALON"/>
+        android:text="ALON"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/p2_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="NOGA"/>
+        android:layout_centerHorizontal="true"
+        android:text="NOGA"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/pits_container"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/p2_name"
+        android:layout_below="@+id/p1_name"/>
+
+
+
+
 </RelativeLayout>
