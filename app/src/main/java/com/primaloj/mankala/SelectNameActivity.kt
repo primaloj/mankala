@@ -21,9 +21,12 @@ class SelectNameActivity : TextWatcher, AppCompatActivity() {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        button_start.isEnabled = p1.text.isNotBlank() && p2.text.isNotBlank()
+        checkNames()
     }
 
+    private fun checkNames() {
+        button_start.isEnabled = p1.text.isNotBlank() && p2.text.isNotBlank()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,8 @@ class SelectNameActivity : TextWatcher, AppCompatActivity() {
         button_start.setOnClickListener { startGame() }
         p1.addTextChangedListener(this)
         p2.addTextChangedListener(this)
+
+        checkNames()
     }
 
 

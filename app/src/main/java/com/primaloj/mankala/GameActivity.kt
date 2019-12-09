@@ -28,7 +28,7 @@ class GameActivity : AppCompatActivity() {
         for (i in 1..8) {
             var view: View
             if (i == 1 || i == 8) {
-                view = View(this)
+                view = Pit(this)
             } else {
                 view = DoublePit(this)
             }
