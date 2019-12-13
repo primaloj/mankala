@@ -14,8 +14,8 @@ class GameActivity : AppCompatActivity() {
         val p1_name = "p1_name"
         val p2_name = "p2_name"
 
-        val p1_color = 0x00ff00
-        val p2_color = 0xff0000
+        val p1_color = 0xff00ff00.toInt()
+        val p2_color = 0xffff0000.toInt()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
