@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <com.primaloj.mankala.Pit
+        android:rotation="180"
         android:layout_margin="4dp"
         android:textAlignment="center"
         android:id="@+id/p1_pit"

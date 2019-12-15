@@ -1,21 +1,19 @@
 package com.primaloj.mankala
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 
 class GameActivity : AppCompatActivity() {
     companion object {
-        val p1_name = "p1_name"
-        val p2_name = "p2_name"
+        const val p1_name = "p1_name"
+        const val p2_name = "p2_name"
 
-        val p1_color = 0xff00ff00.toInt()
-        val p2_color = 0xffff0000.toInt()
+        const val p1_color = 0xff00ff00.toInt()
+        const val p2_color = 0xffff0000.toInt()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,20 +24,21 @@ class GameActivity : AppCompatActivity() {
         createPits()
     }
 
-    fun createPits() {
+    private fun createPits() {
         val container = findViewById<LinearLayout>(R.id.pits_container)
         for (i in 1..8) {
             var view: View
             if (i == 1 || i == 8) {
                 view = Pit(this)
                 if (i == 1) {
-                    (view as Pit).setBorderColor(p1_color)
+                    view.setBorderColor(p1_color)
+                    view.rotation = 180F
                 } else {
-                    (view as Pit).setBorderColor(p2_color)
+                    view.setBorderColor(p2_color)
                 }
             } else {
                 view = DoublePit(this)
-                (view as DoublePit).setBorderColors(p1_color, p2_color)
+                view.setBorderColors(p1_color, p2_color)
             }
             val layoutParams = LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.MATCH_PARENT,
