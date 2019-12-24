@@ -16,6 +16,8 @@ class GameActivity : AppCompatActivity() {
         const val p2_color = 0xffff0000.toInt()
     }
 
+    private var selectedPit: Pit? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -36,11 +38,16 @@ class GameActivity : AppCompatActivity() {
                 } else {
                     view.setBorderColor(p2_color)
                 }
-
             } else {
                 view = DoublePit(this)
                 view.setBorderColors(p1_color, p2_color)
+                view.onPitSelected = {
+                    selectedPit?.deselect()
+                    selectedPit = it
+                    it.select()
+                }
             }
+
             val layoutParams = LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.MATCH_PARENT,
                 1F

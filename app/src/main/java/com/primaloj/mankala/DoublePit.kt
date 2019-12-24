@@ -6,13 +6,15 @@ import android.widget.LinearLayout
 
 class DoublePit(context: Context?) : LinearLayout(context) {
 
+    lateinit var onPitSelected: (pit: Pit) -> Unit
+
     init {
         LayoutInflater.from(context).inflate(R.layout.double_pit, this, true)
         findViewById<Pit>(R.id.p1_pit).setOnClickListener {
-            (it as Pit).select()
+            onPitSelected.invoke(it as Pit)
         }
         findViewById<Pit>(R.id.p2_pit).setOnClickListener {
-            (it as Pit).select()
+            onPitSelected.invoke(it as Pit)
         }
     }
 
