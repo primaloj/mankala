@@ -22,7 +22,7 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
     }
 
     fun select() {
-        findViewById<View>(R.id.pit_container).setBackgroundColor(0xffffff00.toInt())
+        findViewById<View>(R.id.pit_container).setBackgroundColor(0xff663300.toInt())
     }
     fun deselect() {
         findViewById<View>(R.id.pit_container).setBackgroundColor(playerColor)

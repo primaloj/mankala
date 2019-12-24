@@ -12,8 +12,8 @@ class GameActivity : AppCompatActivity() {
         const val p1_name = "p1_name"
         const val p2_name = "p2_name"
 
-        const val p1_color = 0xff00ff00.toInt()
-        const val p2_color = 0xffff0000.toInt()
+        const val p1_color = 0xff0000ff.toInt()
+        const val p2_color = 0xff9900cc.toInt()
     }
 
     private var selectedPit: Pit? = null
