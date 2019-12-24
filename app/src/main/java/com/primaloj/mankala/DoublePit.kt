@@ -5,8 +5,15 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 
 class DoublePit(context: Context?) : LinearLayout(context) {
+
     init {
         LayoutInflater.from(context).inflate(R.layout.double_pit, this, true)
+        findViewById<Pit>(R.id.p1_pit).setOnClickListener {
+            (it as Pit).select()
+        }
+        findViewById<Pit>(R.id.p2_pit).setOnClickListener {
+            (it as Pit).select()
+        }
     }
 
     fun setBorderColors(p1Color: Int, p2Color: Int) {

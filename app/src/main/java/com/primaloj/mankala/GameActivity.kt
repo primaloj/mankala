@@ -36,6 +36,7 @@ class GameActivity : AppCompatActivity() {
                 } else {
                     view.setBorderColor(p2_color)
                 }
+
             } else {
                 view = DoublePit(this)
                 view.setBorderColors(p1_color, p2_color)
