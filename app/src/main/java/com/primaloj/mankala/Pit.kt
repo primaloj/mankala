@@ -31,6 +31,10 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
         findViewById<View>(R.id.pit_container).setBackgroundColor(playerColor)
     }
 
+    fun reset() {
+        setValue(0)
+    }
+
     fun increment() {
         setValue(pitValue + 1)
     }
@@ -39,4 +43,6 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
         pitValue = value
         findViewById<TextView>(R.id.number).text = pitValue.toString()
     }
+
+    fun getValue() = pitValue
 }

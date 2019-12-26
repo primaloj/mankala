@@ -17,6 +17,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     private var selectedPit: Pit? = null
+    private val allPits = mutableListOf<View>()
+    private val p1Pits = mutableListOf<View>()
+    private val p2Pits = mutableListOf<View>()
+    private var currentPlayer: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun createPits() {
+
         val container = findViewById<LinearLayout>(R.id.pits_container)
         for (i in 1..8) {
             var view: View
@@ -43,9 +48,14 @@ class GameActivity : AppCompatActivity() {
                 view = DoublePit(this)
                 view.setBorderColors(p1_color, p2_color)
                 view.onPitSelected = {
-                    selectedPit?.deselect()
-                    selectedPit = it
-                    it.select()
+                    // if already selected - move
+                    if (it == selectedPit) {
+                        boop(i)
+                    } else { // select
+                        selectedPit?.deselect()
+                        selectedPit = it
+                        it.select()
+                    }
                 }
                 view.setInitialValues(4)
             }
@@ -55,8 +65,65 @@ class GameActivity : AppCompatActivity() {
                 1F
             )
             container.addView(view, layoutParams)
-
+            allPits.add(view)
         }
+
+        assignPitsToPlayers()
+    }
+
+    private fun boop(index: Int) {
+        val doublePit = p1Pits[index] as DoublePit
+        doublePit.reset(currentPlayer)
+        if (currentPlayer == 1) {
+            val count = doublePit.getValueForPlayer(currentPlayer)
+            var passedThePointPit = false
+            for (i in 1..count) {
+                val view = p1Pits[index + i]
+                if (view is DoublePit) {
+                    if (passedThePointPit) {
+                        view.addOneToPit(1)
+                    } else {
+                        view.addOneToPit(2)
+                    }
+                } else {
+                    passedThePointPit = true
+                    (view as Pit).increment()
+                }
+            }
+        }
+    }
+
+    private fun assignPitsToPlayers() {
+        // assign pits to players
+        // player1:
+        p1Pits.add(allPits[1])
+        p1Pits.add(allPits[2])
+        p1Pits.add(allPits[3])
+        p1Pits.add(allPits[4])
+        p1Pits.add(allPits[5])
+        p1Pits.add(allPits[6])
+        p1Pits.add(allPits[7])
+        p1Pits.add(allPits[6])
+        p1Pits.add(allPits[5])
+        p1Pits.add(allPits[4])
+        p1Pits.add(allPits[3])
+        p1Pits.add(allPits[2])
+        p1Pits.add(allPits[1])
+
+        // player2:
+        p2Pits.add(allPits[6])
+        p2Pits.add(allPits[5])
+        p2Pits.add(allPits[4])
+        p2Pits.add(allPits[3])
+        p2Pits.add(allPits[2])
+        p2Pits.add(allPits[1])
+        p2Pits.add(allPits[0])
+        p2Pits.add(allPits[1])
+        p2Pits.add(allPits[2])
+        p2Pits.add(allPits[3])
+        p2Pits.add(allPits[4])
+        p2Pits.add(allPits[5])
+        p2Pits.add(allPits[6])
     }
 
 }
