@@ -22,4 +22,11 @@ class DoublePit(context: Context?) : LinearLayout(context) {
         findViewById<Pit>(R.id.p1_pit).setBorderColor(p1Color)
         findViewById<Pit>(R.id.p2_pit).setBorderColor(p2Color)
     }
+    fun addOneToPit(player:Int,currentPlayer:Int) {
+
+    }
+    fun setInitialValues(value:Int) {
+        findViewById<Pit>(R.id.p1_pit).setValue(value)
+        findViewById<Pit>(R.id.p2_pit).setValue(value)
+    }
 }

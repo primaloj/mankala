@@ -13,7 +13,7 @@ class GameActivity : AppCompatActivity() {
         const val p2_name = "p2_name"
 
         const val p1_color = 0xff0000ff.toInt()
-        const val p2_color = 0xff9900cc.toInt()
+        const val p2_color = 0xffff0000.toInt()
     }
 
     private var selectedPit: Pit? = null
@@ -32,6 +32,7 @@ class GameActivity : AppCompatActivity() {
             var view: View
             if (i == 1 || i == 8) {
                 view = Pit(this)
+                view.setValue(0)
                 if (i == 1) {
                     view.setBorderColor(p1_color)
                     view.rotation = 180F
@@ -46,6 +47,7 @@ class GameActivity : AppCompatActivity() {
                     selectedPit = it
                     it.select()
                 }
+                view.setInitialValues(4)
             }
 
             val layoutParams = LinearLayout.LayoutParams(
