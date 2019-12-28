@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_selectname.*
 
 
 class GameActivity : AppCompatActivity() {
@@ -47,13 +48,17 @@ class GameActivity : AppCompatActivity() {
                 view = DoublePit(this)
                 view.setBorderColors(p1_color, p2_color)
                 view.onPitSelected = {
-                    // if already selected - move
-                    if (it == selectedPit) {
-                        boop(i - 1)
-                    } else { // select
-                        selectedPit?.deselect()
-                        selectedPit = it
-                        it.select()
+                    if (it.pitPlayer == currentPlayer && it.getValue() > 0) {
+                        // if already selected - move
+                        if (it == selectedPit) {
+                            boop(i - 1)
+                            it.deselect()
+                            currentPlayer = if (currentPlayer == 1) 2 else 1
+                        } else { // select
+                            selectedPit?.deselect()
+                            selectedPit = it
+                            it.select()
+                        }
                     }
                 }
                 view.setInitialValues(4)
@@ -89,6 +94,24 @@ class GameActivity : AppCompatActivity() {
                     (view as Pit).increment()
                 }
             }
+        } else {
+            val count = doublePit.getValueForPlayer(currentPlayer)
+            doublePit.reset(currentPlayer)
+            var passedThePointPit = false
+            for (i in 1..count) {
+                val view = p2Pits[6 - index + i]
+                if (view is DoublePit) {
+                    if (passedThePointPit) {
+                        view.addOneToPit(1)
+                    } else {
+                        view.addOneToPit(2)
+                    }
+                } else {
+                    passedThePointPit = true
+                    (view as Pit).increment()
+                }
+            }
+
         }
     }
 

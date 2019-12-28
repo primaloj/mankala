@@ -12,6 +12,7 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
 
     private var playerColor: Int = 0
     private var pitValue: Int = 0
+    var pitPlayer: Int = 0
 
     init {
         LayoutInflater.from(context).inflate(R.layout.pit, this, true)
@@ -45,4 +46,8 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
     }
 
     fun getValue() = pitValue
+    fun setPlayer(playerIndex: Int) {
+        pitPlayer = playerIndex
+    }
 }
+
