@@ -82,7 +82,14 @@ class GameActivity : AppCompatActivity() {
         var passedThePointPit = false
         val pits = if (currentPlayer == 1) p1Pits else p2Pits
         for (i in 1..count) {
-            val view = pits[if (currentPlayer == 1) index + i - 1 else 6 - index + i]
+            var pitIndex = if (currentPlayer == 1) index + i - 1 else 6 - index + i
+            pitIndex %= pits.size
+            val view = pits[pitIndex]
+
+            if (passedThePointPit && pitIndex == 0) {
+                passedThePointPit = false
+            }
+
             if (view is DoublePit) {
                 if (passedThePointPit) {
                     view.addOneToPit(if (currentPlayer == 1) 2 else 1)
@@ -90,7 +97,7 @@ class GameActivity : AppCompatActivity() {
                     view.addOneToPit(if (currentPlayer == 1) 1 else 2)
                 }
             } else {
-                passedThePointPit = true
+                passedThePointPit = !passedThePointPit
                 (view as Pit).increment()
             }
         }
