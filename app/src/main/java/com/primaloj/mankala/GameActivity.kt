@@ -77,41 +77,22 @@ class GameActivity : AppCompatActivity() {
 
     private fun boop(index: Int) {
         val doublePit = p1Pits[index - 1] as DoublePit
-        if (currentPlayer == 1) {
-            val count = doublePit.getValueForPlayer(currentPlayer)
-            doublePit.reset(currentPlayer)
-            var passedThePointPit = false
-            for (i in 1..count) {
-                val view = p1Pits[index + i - 1]
-                if (view is DoublePit) {
-                    if (passedThePointPit) {
-                        view.addOneToPit(2)
-                    } else {
-                        view.addOneToPit(1)
-                    }
+        val count = doublePit.getValueForPlayer(currentPlayer)
+        doublePit.reset(currentPlayer)
+        var passedThePointPit = false
+        val pits = if (currentPlayer == 1) p1Pits else p2Pits
+        for (i in 1..count) {
+            val view = pits[if (currentPlayer == 1) index + i - 1 else 6 - index + i]
+            if (view is DoublePit) {
+                if (passedThePointPit) {
+                    view.addOneToPit(if (currentPlayer == 1) 2 else 1)
                 } else {
-                    passedThePointPit = true
-                    (view as Pit).increment()
+                    view.addOneToPit(if (currentPlayer == 1) 1 else 2)
                 }
+            } else {
+                passedThePointPit = true
+                (view as Pit).increment()
             }
-        } else {
-            val count = doublePit.getValueForPlayer(currentPlayer)
-            doublePit.reset(currentPlayer)
-            var passedThePointPit = false
-            for (i in 1..count) {
-                val view = p2Pits[6 - index + i]
-                if (view is DoublePit) {
-                    if (passedThePointPit) {
-                        view.addOneToPit(1)
-                    } else {
-                        view.addOneToPit(2)
-                    }
-                } else {
-                    passedThePointPit = true
-                    (view as Pit).increment()
-                }
-            }
-
         }
     }
 
