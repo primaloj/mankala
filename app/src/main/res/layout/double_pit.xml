@@ -8,7 +8,7 @@
         android:rotation="180"
         android:layout_margin="4dp"
         android:textAlignment="center"
-        android:id="@+id/p1_pit"
+        android:id="@+id/p2_pit"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
@@ -20,7 +20,7 @@
         android:textAlignment="center"
         android:gravity="center_vertical"
         android:layout_weight="1"
-        android:id="@+id/p2_pit"
+        android:id="@+id/p1_pit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="32sp" />

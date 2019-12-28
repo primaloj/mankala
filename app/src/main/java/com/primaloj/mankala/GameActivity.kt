@@ -31,7 +31,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun createPits() {
-
         val container = findViewById<LinearLayout>(R.id.pits_container)
         for (i in 1..8) {
             var view: View
@@ -39,10 +38,10 @@ class GameActivity : AppCompatActivity() {
                 view = Pit(this)
                 view.setValue(0)
                 if (i == 1) {
-                    view.setBorderColor(p1_color)
+                    view.setBorderColor(p2_color)
                     view.rotation = 180F
                 } else {
-                    view.setBorderColor(p2_color)
+                    view.setBorderColor(p1_color)
                 }
             } else {
                 view = DoublePit(this)
@@ -50,7 +49,7 @@ class GameActivity : AppCompatActivity() {
                 view.onPitSelected = {
                     // if already selected - move
                     if (it == selectedPit) {
-                        boop(i)
+                        boop(i - 1)
                     } else { // select
                         selectedPit?.deselect()
                         selectedPit = it
@@ -72,18 +71,18 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun boop(index: Int) {
-        val doublePit = p1Pits[index] as DoublePit
-        doublePit.reset(currentPlayer)
+        val doublePit = p1Pits[index - 1] as DoublePit
         if (currentPlayer == 1) {
             val count = doublePit.getValueForPlayer(currentPlayer)
+            doublePit.reset(currentPlayer)
             var passedThePointPit = false
             for (i in 1..count) {
-                val view = p1Pits[index + i]
+                val view = p1Pits[index + i - 1]
                 if (view is DoublePit) {
                     if (passedThePointPit) {
-                        view.addOneToPit(1)
-                    } else {
                         view.addOneToPit(2)
+                    } else {
+                        view.addOneToPit(1)
                     }
                 } else {
                     passedThePointPit = true
