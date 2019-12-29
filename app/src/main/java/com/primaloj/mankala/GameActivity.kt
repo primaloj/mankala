@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.util.function.DoubleSupplier
 
 
 class GameActivity : AppCompatActivity() {
@@ -64,6 +65,7 @@ class GameActivity : AppCompatActivity() {
                         // if already selected - move
                         if (it == selectedPit) {
                             boop(i - 1)
+                            checkAllZeros()
                             it.deselect()
                         } else { // select
                             selectedPit?.deselect()
@@ -129,6 +131,31 @@ class GameActivity : AppCompatActivity() {
         }
         if (!doubleTurn) {
             togglePlayer()
+        }
+    }
+
+    private fun checkAllZeros() {
+        val pits = if (currentPlayer == 1) p1Pits else p2Pits
+        for (i in 0..pits.size / 2 - 1) {
+            if ((pits[i] as DoublePit).getValueForPlayer(currentPlayer) > 0) {
+                return
+            }
+        }
+
+        var total = 0
+        for (i in pits.size / 2 + 1..pits.size - 1) {
+            total += (pits[i] as DoublePit).getValueForPlayer(otherPlayer())
+            (pits[i] as DoublePit).reset(otherPlayer())
+        }
+        (pits[pits.size / 2] as Pit).add(total)
+        checkWinner()
+    }
+
+    private fun checkWinner() {
+        if ((p1Pits[p1Pits.size / 2] as Pit).getValue() > ((p2Pits[p2Pits.size / 2] as Pit).getValue())) {
+            findViewById<View>(R.id.p1_name).setBackgroundColor(0x80ff00ff.toInt())
+        } else {
+            findViewById<View>(R.id.p2_name).setBackgroundColor(0x80ff00ff.toInt())
         }
     }
 
