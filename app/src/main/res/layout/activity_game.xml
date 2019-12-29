@@ -6,32 +6,32 @@
     tools:context=".SelectNameActivity">
 
     <TextView
-        android:id="@+id/p1_name"
-        android:rotation="180"
-        android:layout_width="wrap_content"
+        android:id="@+id/p2_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:rotation="180"
         android:text="ALON"
+        android:textAlignment="center"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/p2_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/p1_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="NOGA"
+        android:textAlignment="center"
         android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/pits_container"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/p2_name"
-        android:layout_below="@+id/p1_name"/>
-
-
+        android:layout_above="@+id/p1_name"
+        android:layout_below="@+id/p2_name"
+        android:orientation="horizontal" />
 
 
 </RelativeLayout>

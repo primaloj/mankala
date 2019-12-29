@@ -1,11 +1,11 @@
 package com.primaloj.mankala
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_selectname.*
 
 
 class GameActivity : AppCompatActivity() {
@@ -29,6 +29,18 @@ class GameActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.p1_name).text = intent.getStringExtra(p1_name)
         findViewById<TextView>(R.id.p2_name).text = intent.getStringExtra(p2_name)
         createPits()
+        findViewById<View>(R.id.p1_name).setBackgroundColor(0x80ffff00.toInt())
+    }
+
+    private fun togglePlayer() {
+        currentPlayer = otherPlayer()
+        if (currentPlayer == 1) {
+            findViewById<View>(R.id.p1_name).setBackgroundColor(0x80ffff00.toInt())
+            findViewById<View>(R.id.p2_name).setBackgroundColor(Color.TRANSPARENT)
+        } else {
+            findViewById<View>(R.id.p2_name).setBackgroundColor(0x80ffff00.toInt())
+            findViewById<View>(R.id.p1_name).setBackgroundColor(Color.TRANSPARENT)
+        }
     }
 
     private fun createPits() {
@@ -97,7 +109,10 @@ class GameActivity : AppCompatActivity() {
                     if (passedThePointPit) (otherPlayer()) else currentPlayer
                 view.addOneToPit(doublePitIndex)
 
-                if (count == 1 && view.getValueForPlayer(currentPlayer) == 1) {
+                if (count == 1 &&
+                    view.getValueForPlayer(currentPlayer) == 1 &&
+                    view.getValueForPlayer(otherPlayer()) > 0
+                ) {
                     val total = view.getValueForPlayer(otherPlayer()) + 1
                     view.reset(1)
                     view.reset(2)
@@ -113,7 +128,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
         if (!doubleTurn) {
-            currentPlayer = otherPlayer()
+            togglePlayer()
         }
     }
 
