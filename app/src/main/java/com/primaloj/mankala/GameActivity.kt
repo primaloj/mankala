@@ -53,7 +53,6 @@ class GameActivity : AppCompatActivity() {
                         if (it == selectedPit) {
                             boop(i - 1)
                             it.deselect()
-                            currentPlayer = if (currentPlayer == 1) 2 else 1
                         } else { // select
                             selectedPit?.deselect()
                             selectedPit = it
@@ -81,6 +80,9 @@ class GameActivity : AppCompatActivity() {
         doublePit.reset(currentPlayer)
         var passedThePointPit = false
         val pits = if (currentPlayer == 1) p1Pits else p2Pits
+
+        var doubleTurn = false
+
         for (i in 1..count) {
             var pitIndex = if (currentPlayer == 1) index + i - 1 else 6 - index + i
             pitIndex %= pits.size
@@ -99,7 +101,14 @@ class GameActivity : AppCompatActivity() {
             } else {
                 passedThePointPit = !passedThePointPit
                 (view as Pit).increment()
+
+                if (i == count) {
+                    doubleTurn = true
+                }
             }
+        }
+        if (!doubleTurn) {
+            currentPlayer = if (currentPlayer == 1) 2 else 1
         }
     }
 
