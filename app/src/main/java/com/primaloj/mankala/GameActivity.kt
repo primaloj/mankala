@@ -93,11 +93,9 @@ class GameActivity : AppCompatActivity() {
             }
 
             if (view is DoublePit) {
-                if (passedThePointPit) {
-                    view.addOneToPit(if (currentPlayer == 1) 2 else 1)
-                } else {
-                    view.addOneToPit(if (currentPlayer == 1) 1 else 2)
-                }
+                val doublePitIndex =
+                    if (passedThePointPit) (if (currentPlayer == 1) 2 else 1) else currentPlayer
+                view.addOneToPit(doublePitIndex)
             } else {
                 passedThePointPit = !passedThePointPit
                 (view as Pit).increment()
