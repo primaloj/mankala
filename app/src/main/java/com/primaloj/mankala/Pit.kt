@@ -49,5 +49,9 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
     fun setPlayer(playerIndex: Int) {
         pitPlayer = playerIndex
     }
+
+    fun add(addValue: Int) {
+        setValue(pitValue + addValue)
+    }
 }
 

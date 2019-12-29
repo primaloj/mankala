@@ -94,8 +94,15 @@ class GameActivity : AppCompatActivity() {
 
             if (view is DoublePit) {
                 val doublePitIndex =
-                    if (passedThePointPit) (if (currentPlayer == 1) 2 else 1) else currentPlayer
+                    if (passedThePointPit) (otherPlayer()) else currentPlayer
                 view.addOneToPit(doublePitIndex)
+
+                if (count == 1 && view.getValueForPlayer(currentPlayer) == 1) {
+                    val total = view.getValueForPlayer(otherPlayer()) + 1
+                    view.reset(1)
+                    view.reset(2)
+                    (pits[pits.size / 2] as Pit).add(total)
+                }
             } else {
                 passedThePointPit = !passedThePointPit
                 (view as Pit).increment()
@@ -106,9 +113,11 @@ class GameActivity : AppCompatActivity() {
             }
         }
         if (!doubleTurn) {
-            currentPlayer = if (currentPlayer == 1) 2 else 1
+            currentPlayer = otherPlayer()
         }
     }
+
+    private fun otherPlayer() = if (currentPlayer == 1) 2 else 1
 
     private fun assignPitsToPlayers() {
         // assign pits to players
