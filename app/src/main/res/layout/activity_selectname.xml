@@ -28,7 +28,7 @@
 
             <EditText
                 android:id="@+id/p1"
-                android:text="NOGA"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -53,7 +53,7 @@
                 android:textSize="30sp" />
 
             <EditText
-                android:text="ALON"
+                android:text=""
                 android:id="@+id/p2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
