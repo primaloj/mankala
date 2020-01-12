@@ -65,7 +65,6 @@ class GameActivity : AppCompatActivity() {
                         // if already selected - move
                         if (it == selectedPit) {
                             boop(i - 1)
-                            checkAllZeros()
                             it.deselect()
                         } else { // select
                             selectedPit?.deselect()
@@ -74,7 +73,7 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                view.setInitialValues(4)
+                view.setInitialValues(2)
             }
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -129,16 +128,17 @@ class GameActivity : AppCompatActivity() {
                 }
             }
         }
-        if (!doubleTurn) {
+
+        if (!checkGameOver() && !doubleTurn) {
             togglePlayer()
         }
     }
 
-    private fun checkAllZeros() {
+    private fun checkGameOver(): Boolean {
         val pits = if (currentPlayer == 1) p1Pits else p2Pits
         for (i in 0..pits.size / 2 - 1) {
             if ((pits[i] as DoublePit).getValueForPlayer(currentPlayer) > 0) {
-                return
+                return false
             }
         }
 
@@ -149,6 +149,7 @@ class GameActivity : AppCompatActivity() {
         }
         (pits[pits.size / 2] as Pit).add(total)
         checkWinner()
+        return true
     }
 
     private fun checkWinner() {

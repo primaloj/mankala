@@ -33,7 +33,7 @@ class DoublePit(context: Context?) : LinearLayout(context) {
         }
     }
 
-    fun reset(pitIndex: Int){
+    fun reset(pitIndex: Int) {
         if (pitIndex == 1) {
             findViewById<Pit>(R.id.p1_pit).reset()
         } else {
