@@ -73,7 +73,7 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                view.setInitialValues(2)
+                view.setInitialValues(4)
             }
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -155,8 +155,10 @@ class GameActivity : AppCompatActivity() {
     private fun checkWinner() {
         if ((p1Pits[p1Pits.size / 2] as Pit).getValue() > ((p2Pits[p2Pits.size / 2] as Pit).getValue())) {
             findViewById<View>(R.id.p1_name).setBackgroundColor(0x80ff00ff.toInt())
+            findViewById<View>(R.id.p2_name).setBackgroundColor(Color.TRANSPARENT.toInt())
         } else {
             findViewById<View>(R.id.p2_name).setBackgroundColor(0x80ff00ff.toInt())
+            findViewById<View>(R.id.p1_name).setBackgroundColor(Color.TRANSPARENT.toInt())
         }
     }
 
