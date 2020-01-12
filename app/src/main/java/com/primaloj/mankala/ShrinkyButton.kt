@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageButton
 
 
@@ -20,13 +21,13 @@ class ShrinkyButton @JvmOverloads constructor(
         setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    v.animate().scaleX(0.9F).scaleY(0.9F).setDuration(40).start()
+                    scaleButton(v, 0.9F)
                     rect =
                         Rect(v.left, v.top, v.right, v.bottom)
                     touchInside = true
                 }
                 MotionEvent.ACTION_UP -> {
-                    v.animate().scaleX(1.0F).scaleY(1.0F).setDuration(40).start()
+                    scaleButton(v, 1.0F)
                     if (touchInside) {
                         onClick.invoke()
                         touchInside = false
@@ -40,13 +41,16 @@ class ShrinkyButton @JvmOverloads constructor(
                     ) {
                         // User moved outside bounds
                         touchInside = false
-                        v.animate().scaleX(1.0F).scaleY(1.0F).setDuration(40).start()
+                        scaleButton(v, 1.0F)
                     }
                 }
             }
 
             return@setOnTouchListener true
         }
+    }
 
+    private fun scaleButton(v: View, value: Float) {
+        v.animate().scaleX(value).scaleY(value).setDuration(40).start()
     }
 }
