@@ -168,34 +168,21 @@ class GameActivity : AppCompatActivity() {
     private fun assignPitsToPlayers() {
         // assign pits to players
         // player1:
-        p1Pits.add(allPits[1])
-        p1Pits.add(allPits[2])
-        p1Pits.add(allPits[3])
-        p1Pits.add(allPits[4])
-        p1Pits.add(allPits[5])
-        p1Pits.add(allPits[6])
-        p1Pits.add(allPits[7])
-        p1Pits.add(allPits[6])
-        p1Pits.add(allPits[5])
-        p1Pits.add(allPits[4])
-        p1Pits.add(allPits[3])
-        p1Pits.add(allPits[2])
-        p1Pits.add(allPits[1])
+        for (i in 1 until allPits.size) {
+            p1Pits.add(allPits[i])
+        }
+
+        for (i in allPits.size - 2 downTo 1) {
+            p1Pits.add(allPits[i])
+        }
 
         // player2:
-        p2Pits.add(allPits[6])
-        p2Pits.add(allPits[5])
-        p2Pits.add(allPits[4])
-        p2Pits.add(allPits[3])
-        p2Pits.add(allPits[2])
-        p2Pits.add(allPits[1])
-        p2Pits.add(allPits[0])
-        p2Pits.add(allPits[1])
-        p2Pits.add(allPits[2])
-        p2Pits.add(allPits[3])
-        p2Pits.add(allPits[4])
-        p2Pits.add(allPits[5])
-        p2Pits.add(allPits[6])
+        for (i in allPits.size - 2 downTo 0) {
+            p2Pits.add(allPits[i])
+        }
+        for (i in 1 until allPits.size - 2) {
+            p2Pits.add(allPits[i])
+        }
     }
 
 }
