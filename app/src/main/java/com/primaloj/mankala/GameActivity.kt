@@ -73,7 +73,7 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                view.setInitialValues(4)
+                view.setInitialValues(SettingsActivity.marblesCount)
             }
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -131,6 +131,7 @@ class GameActivity : AppCompatActivity() {
 
         if (!checkGameOver() && !doubleTurn) {
             togglePlayer()
+            checkGameOver()
         }
     }
 
