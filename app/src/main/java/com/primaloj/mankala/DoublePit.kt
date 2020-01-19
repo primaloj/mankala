@@ -2,11 +2,13 @@ package com.primaloj.mankala
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 
 class DoublePit(context: Context?) : LinearLayout(context) {
 
     lateinit var onPitSelected: (pit: Pit) -> Unit
+    lateinit var onLongClick: (pit: Pit) -> Unit
     private var p1pit: Pit
     private var p2pit: Pit
 
@@ -22,6 +24,14 @@ class DoublePit(context: Context?) : LinearLayout(context) {
 
         p2pit.setOnClickListener {
             onPitSelected.invoke(it as Pit)
+        }
+        p1pit.setOnLongClickListener {
+            onLongClick.invoke(it as Pit)
+            true
+        }
+        p2pit.setOnLongClickListener {
+            onLongClick.invoke(it as Pit)
+            true
         }
     }
 
@@ -40,6 +50,9 @@ class DoublePit(context: Context?) : LinearLayout(context) {
     fun reset(index: Int) {
         getPitForPlayer(index).reset()
     }
+    fun setValue(index: Int,value: Int) {
+        getPitForPlayer(index).setValue(value)
+    }
 
     @Suppress("unused")
     fun setInitialValues(value: Int) {
@@ -57,5 +70,9 @@ class DoublePit(context: Context?) : LinearLayout(context) {
         } else {
             p2pit
         }
+    }
+
+    override fun toString(): String {
+        return "p1: ${p1pit} | p2: ${p2pit}"
     }
 }

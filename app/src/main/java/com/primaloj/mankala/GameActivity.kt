@@ -1,12 +1,15 @@
 package com.primaloj.mankala
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import java.util.function.DoubleSupplier
 
 
 class GameActivity : AppCompatActivity() {
@@ -73,6 +76,13 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+                if (BuildConfig.DEBUG) {
+                    view.onLongClick = {
+                        inputNumber(it)
+                    }
+                }
+
                 view.setInitialValues(SettingsActivity.marblesCount)
             }
 
@@ -183,6 +193,26 @@ class GameActivity : AppCompatActivity() {
         for (i in 1 until allPits.size - 2) {
             p2Pits.add(allPits[i])
         }
+    }
+
+    fun inputNumber(pit: Pit) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Enter Value")
+
+        val input = EditText(this)
+
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        builder.setView(input)
+
+        builder.setPositiveButton("OK") { dialog, _ ->
+            pit.setValue(input.text.toString().toInt())
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 
 }
