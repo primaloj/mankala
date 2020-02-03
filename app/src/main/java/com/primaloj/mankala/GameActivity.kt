@@ -154,9 +154,10 @@ class GameActivity : AppCompatActivity() {
         }
 
         var total = 0
-        for (i in pits.size / 2 + 1..pits.size - 1) {
-            total += (pits[i] as DoublePit).getValueForPlayer(otherPlayer())
-            (pits[i] as DoublePit).reset(otherPlayer())
+        for (i in 1..allPits.size - 2){
+            val doublePit = allPits[i] as DoublePit
+            total += doublePit.getValueForPlayer(otherPlayer())
+            doublePit.reset(otherPlayer())
         }
         (pits[pits.size / 2] as Pit).add(total)
         checkWinner()
