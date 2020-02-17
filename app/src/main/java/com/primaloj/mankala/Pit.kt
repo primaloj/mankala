@@ -53,5 +53,9 @@ class Pit(context: Context?, attrs: AttributeSet? = null) :
     fun add(addValue: Int) {
         setValue(pitValue + addValue)
     }
+
+    override fun toString(): String {
+        return pitValue.toString()
+    }
 }
 
