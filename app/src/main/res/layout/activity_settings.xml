@@ -6,13 +6,12 @@
     tools:context=".HomeActivity"
     android:background="@drawable/mankala_home_screen_background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:text="Settings"
-        android:textSize="32sp" />
+        android:layout_marginTop="30dp"
+        android:src="@drawable/settings_title" />
 
     <ImageButton
         android:id="@+id/button_close"
