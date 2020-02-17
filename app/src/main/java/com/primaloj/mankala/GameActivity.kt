@@ -1,12 +1,15 @@
 package com.primaloj.mankala
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import java.util.function.DoubleSupplier
 
 
 class GameActivity : AppCompatActivity() {
@@ -65,7 +68,6 @@ class GameActivity : AppCompatActivity() {
                         // if already selected - move
                         if (it == selectedPit) {
                             boop(i - 1)
-                            checkAllZeros()
                             it.deselect()
                         } else { // select
                             selectedPit?.deselect()
@@ -74,7 +76,14 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                view.setInitialValues(4)
+
+                if (BuildConfig.DEBUG) {
+                    view.onLongClick = {
+                        inputNumber(it)
+                    }
+                }
+
+                view.setInitialValues(SettingsActivity.marblesCount)
             }
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -129,33 +138,39 @@ class GameActivity : AppCompatActivity() {
                 }
             }
         }
-        if (!doubleTurn) {
+
+        if (!checkGameOver() && !doubleTurn) {
             togglePlayer()
+            checkGameOver()
         }
     }
 
-    private fun checkAllZeros() {
+    private fun checkGameOver(): Boolean {
         val pits = if (currentPlayer == 1) p1Pits else p2Pits
         for (i in 0..pits.size / 2 - 1) {
             if ((pits[i] as DoublePit).getValueForPlayer(currentPlayer) > 0) {
-                return
+                return false
             }
         }
 
         var total = 0
-        for (i in pits.size / 2 + 1..pits.size - 1) {
-            total += (pits[i] as DoublePit).getValueForPlayer(otherPlayer())
-            (pits[i] as DoublePit).reset(otherPlayer())
+        for (i in 1..allPits.size - 2){
+            val doublePit = allPits[i] as DoublePit
+            total += doublePit.getValueForPlayer(otherPlayer())
+            doublePit.reset(otherPlayer())
         }
         (pits[pits.size / 2] as Pit).add(total)
         checkWinner()
+        return true
     }
 
     private fun checkWinner() {
         if ((p1Pits[p1Pits.size / 2] as Pit).getValue() > ((p2Pits[p2Pits.size / 2] as Pit).getValue())) {
             findViewById<View>(R.id.p1_name).setBackgroundColor(0x80ff00ff.toInt())
+            findViewById<View>(R.id.p2_name).setBackgroundColor(Color.TRANSPARENT.toInt())
         } else {
             findViewById<View>(R.id.p2_name).setBackgroundColor(0x80ff00ff.toInt())
+            findViewById<View>(R.id.p1_name).setBackgroundColor(Color.TRANSPARENT.toInt())
         }
     }
 
@@ -164,34 +179,41 @@ class GameActivity : AppCompatActivity() {
     private fun assignPitsToPlayers() {
         // assign pits to players
         // player1:
-        p1Pits.add(allPits[1])
-        p1Pits.add(allPits[2])
-        p1Pits.add(allPits[3])
-        p1Pits.add(allPits[4])
-        p1Pits.add(allPits[5])
-        p1Pits.add(allPits[6])
-        p1Pits.add(allPits[7])
-        p1Pits.add(allPits[6])
-        p1Pits.add(allPits[5])
-        p1Pits.add(allPits[4])
-        p1Pits.add(allPits[3])
-        p1Pits.add(allPits[2])
-        p1Pits.add(allPits[1])
+        for (i in 1 until allPits.size) {
+            p1Pits.add(allPits[i])
+        }
+
+        for (i in allPits.size - 2 downTo 1) {
+            p1Pits.add(allPits[i])
+        }
 
         // player2:
-        p2Pits.add(allPits[6])
-        p2Pits.add(allPits[5])
-        p2Pits.add(allPits[4])
-        p2Pits.add(allPits[3])
-        p2Pits.add(allPits[2])
-        p2Pits.add(allPits[1])
-        p2Pits.add(allPits[0])
-        p2Pits.add(allPits[1])
-        p2Pits.add(allPits[2])
-        p2Pits.add(allPits[3])
-        p2Pits.add(allPits[4])
-        p2Pits.add(allPits[5])
-        p2Pits.add(allPits[6])
+        for (i in allPits.size - 2 downTo 0) {
+            p2Pits.add(allPits[i])
+        }
+        for (i in 1 until allPits.size - 2) {
+            p2Pits.add(allPits[i])
+        }
+    }
+
+    fun inputNumber(pit: Pit) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Enter Value")
+
+        val input = EditText(this)
+
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        builder.setView(input)
+
+        builder.setPositiveButton("OK") { dialog, _ ->
+            pit.setValue(input.text.toString().toInt())
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 
 }
