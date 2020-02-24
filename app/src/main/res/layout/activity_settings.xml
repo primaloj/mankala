@@ -78,7 +78,7 @@
                 android:textAlignment="center"
                 android:textSize="32dp"
                 android:textColor="@color/lightWood"
-                android:backgroundTint="@color/lightWood"/>
+                android:backgroundTint="@color/lightWood" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
