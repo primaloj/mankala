@@ -34,7 +34,7 @@ class SettingsActivity : AppCompatActivity() {
                 isChecked
             )
         }
-        findViewById<ImageButton>(R.id.button_close).setOnClickListener { close() }
+        findViewById<ShrinkyButton>(R.id.button_close).onClick= { close() }
         findViewById<EditText>(R.id.marble_count).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
