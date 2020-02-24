@@ -1,21 +1,17 @@
 package com.primaloj.mankala
 
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.view.WindowManager
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class SettingsActivity : AppCompatActivity() {
-
-    companion object {
-        var marblesCount: Int = 4
-    }
 
     private lateinit var checkSound: CheckBox
 
@@ -47,10 +43,12 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                marblesCount = s.toString().toInt()
+                if(s.toString().isEmpty()) return
+                GameSettings.setMarbleCount(this@SettingsActivity, s.toString().toInt())
             }
 
         })
+        findViewById<EditText>(R.id.marble_count).text =SpannableStringBuilder( GameSettings.getMarbleCount(this).toString())
     }
 
     fun close() {

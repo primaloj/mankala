@@ -1,6 +1,5 @@
 package com.primaloj.mankala
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
@@ -83,7 +82,7 @@ class GameActivity : AppCompatActivity() {
                     }
                 }
 
-                view.setInitialValues(SettingsActivity.marblesCount)
+                view.setInitialValues(GameSettings.getMarbleCount(this))
             }
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -154,7 +153,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         var total = 0
-        for (i in 1..allPits.size - 2){
+        for (i in 1..allPits.size - 2) {
             val doublePit = allPits[i] as DoublePit
             total += doublePit.getValueForPlayer(otherPlayer())
             doublePit.reset(otherPlayer())
