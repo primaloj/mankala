@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 class SelectNameActivity : TextWatcher, AppCompatActivity() {
     lateinit var p1: EditText
     lateinit var p2: EditText
-    lateinit var button_start: Button
+    lateinit var button_start: ShrinkyButton
 
     override fun afterTextChanged(s: Editable?) {
     }
@@ -31,6 +32,13 @@ class SelectNameActivity : TextWatcher, AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selectname)
+        findViewById<ShrinkyButton>(R.id.button_close).onClick= { close() }
+        findViewById<ShrinkyButton>(R.id.button_start).onClick= { startGame() }
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
         findViewById<ImageButton>(R.id.button_close).setOnClickListener { close() }
         p1 = findViewById(R.id.p1)
         p2 = findViewById(R.id.p2)
